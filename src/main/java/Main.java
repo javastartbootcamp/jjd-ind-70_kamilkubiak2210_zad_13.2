@@ -14,7 +14,6 @@ public class Main {
         printReversedNumberList(list);
         calculateAndPrintSum(list);
         printTheBiggestAndTheSmallestNumber(list);
-
     }
 
     private static void printTheBiggestAndTheSmallestNumber(List<Integer> list) {

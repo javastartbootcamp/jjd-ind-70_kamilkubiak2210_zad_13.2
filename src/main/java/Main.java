@@ -9,50 +9,17 @@ public class Main {
 
     public void run(Scanner scanner) {
         List<Integer> list = new LinkedList<>();
-        List<Integer> reversedList = new LinkedList<>();
-        int i;
-        do {
-            System.out.println("Podaj liczbę");
-            i = scanner.nextInt();
-            list.add(i);
-        } while (i > -1);
-        Integer lastIntInList = list.get(list.size() - 1);
-        list.remove(lastIntInList);
 
-        System.out.println();
+        loadDataFromUser(scanner, list);
+        printReversedNumberList(list);
+        calculateAndPrintSum(list);
+        printTheBiggestAndTheSmallestNumber(list);
+    }
 
-        int index = 1;
+    private static void printTheBiggestAndTheSmallestNumber(List<Integer> list) {
         if (!list.isEmpty()) {
-            for (int i1 = 0; i1 < list.size(); i1++) {
-                Integer integer = list.get(list.size() - index);
-                index++;
-                reversedList.add(integer);
-            }
-            for (int i1 = 0; i1 < reversedList.size(); i1++) {
-                Integer integer = reversedList.get(i1);
-                System.out.print(integer);
-                if (i1 < reversedList.size() - 1) {
-                    System.out.print(", ");
-                }
-            }
-        }
-        System.out.println();
-        if (!list.isEmpty()) {
-            int addResult = 0;
-            for (int i1 = 0; i1 < list.size(); i1++) {
-                Integer integer = list.get(i1);
-                addResult += integer;
-                System.out.print(integer);
-                if (i1 < reversedList.size() - 1) {
-                    System.out.print(" + ");
-                } else if (i1 == reversedList.size() - 1) {
-                    System.out.println(" = " + addResult);
-                }
-            }
-        }
-        if (!list.isEmpty()) {
-            int theSmallestNumber = 10000_00000;
-            int theBiggestNumber = 0;
+            int theSmallestNumber = list.get(0);
+            int theBiggestNumber = list.get(0);
             for (Integer integer : list) {
                 if (integer > theBiggestNumber) {
                     theBiggestNumber = integer;
@@ -68,6 +35,49 @@ public class Main {
         } else {
             System.out.println("Lista jest pusta");
         }
+    }
+
+    private static void calculateAndPrintSum(List<Integer> list) {
+        if (!list.isEmpty()) {
+            int addResult = 0;
+            for (int i1 = 0; i1 < list.size(); i1++) {
+                Integer integer = list.get(i1);
+                addResult += integer;
+                System.out.print(integer);
+                if (i1 < list.size() - 1) {
+                    System.out.print(" + ");
+                } else if (i1 == list.size() - 1) {
+                    System.out.println(" = " + addResult);
+                }
+            }
+        }
+    }
+
+    private static void loadDataFromUser(Scanner scanner, List<Integer> list) {
+        while (true) {
+            System.out.println("Podaj liczbę");
+            int i = scanner.nextInt();
+            if (i < 0) {
+                break;
+            }
+            list.add(i);
+        }
+        System.out.println();
+    }
+
+    private static void printReversedNumberList(List<Integer> list) {
+        if (!list.isEmpty()) {
+            for (int i1 = list.size() - 1; i1 >= 0; i1--) {
+                Integer integer = list.get(i1);
+                System.out.print(integer);
+                if (i1 > 0) {
+                    System.out.print(", ");
+                }
+
+            }
+
+        }
+        System.out.println();
     }
 }
 

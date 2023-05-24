@@ -8,9 +8,7 @@ public class Main {
     }
 
     public void run(Scanner scanner) {
-        List<Integer> list = new LinkedList<>();
-
-        loadDataFromUser(scanner, list);
+        List<Integer> list = loadDataFromUser(scanner);
         printReversedNumberList(list);
         calculateAndPrintSum(list);
         printTheBiggestAndTheSmallestNumber(list);
@@ -41,37 +39,41 @@ public class Main {
     private static void calculateAndPrintSum(List<Integer> list) {
         if (!list.isEmpty()) {
             int addResult = 0;
-            for (int i1 = 0; i1 < list.size(); i1++) {
-                Integer integer = list.get(i1);
+            for (int i = 0; i < list.size(); i++) {
+                Integer integer = list.get(i);
                 addResult += integer;
                 System.out.print(integer);
-                if (i1 < list.size() - 1) {
+                if (i < list.size() - 1) {
                     System.out.print(" + ");
-                } else if (i1 == list.size() - 1) {
+                } else {
                     System.out.println(" = " + addResult);
                 }
             }
         }
     }
 
-    private static void loadDataFromUser(Scanner scanner, List<Integer> list) {
-        while (true) {
+    private static List<Integer> loadDataFromUser(Scanner scanner) {
+        List<Integer> list = new LinkedList<>();
+        boolean userInputIsPositive = true;
+        while (userInputIsPositive) {
             System.out.println("Podaj liczbę");
             int i = scanner.nextInt();
             if (i < 0) {
-                break;
+                userInputIsPositive = false;
+                continue;
             }
             list.add(i);
         }
         System.out.println();
+        return list;
     }
 
     private static void printReversedNumberList(List<Integer> list) {
         if (!list.isEmpty()) {
-            for (int i1 = list.size() - 1; i1 >= 0; i1--) {
-                Integer integer = list.get(i1);
+            for (int i = list.size() - 1; i >= 0; i--) {
+                Integer integer = list.get(i);
                 System.out.print(integer);
-                if (i1 > 0) {
+                if (i > 0) {
                     System.out.print(", ");
                 }
 
